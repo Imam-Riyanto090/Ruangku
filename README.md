@@ -8,7 +8,7 @@ Creator  :
 |Abdul Rafi|...|
 |Alfarizi Khoerul Rizal|...|
 |Dewi Siti Jamilah|...|
-|Faiz Yudiana Fathul Hakim|...|
+|Faiz Yudiana Fathul Hakim|2300196|
 |Imam Riyanto|2306963|
 
 Dibuat untuk memenuhi proyek akhir mata kuliah Basis Data dan Sistem Basis Data
