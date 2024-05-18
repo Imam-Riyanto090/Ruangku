@@ -7,7 +7,7 @@ Creator  :
 |-------|-------|
 |Abdul Rafi|2300062|
 |Alfarizi Khoerul Rizal|...|
-|Dewi Siti Jamilah|...|
+|Dewi Siti Jamilah|2300707|
 |Faiz Yudiana Fathul Hakim|2300196|
 |Imam Riyanto|2306963|
 
