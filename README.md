@@ -5,7 +5,7 @@ Ruangku adalah aplikasi pengelola sewa ruang meeting, anda dapat menyewa ruang m
 Creator  :
 |Nama|NIM|
 |-------|-------|
-|Abdul Rafi|...|
+|Abdul Rafi|2300062|
 |Alfarizi Khoerul Rizal|...|
 |Dewi Siti Jamilah|...|
 |Faiz Yudiana Fathul Hakim|2300196|
