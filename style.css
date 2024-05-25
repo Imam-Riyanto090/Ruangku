@@ -20,14 +20,14 @@ body {
     font-size: 36px;
     font-weight: 700;
     margin: 0;
-    color: #ffffff; /* Warna hitam untuk teks selamat datang */
+    color: #ffffff; 
 }
 
 .welcome-description {
     font-size: 20px;
     font-weight: 400;
     margin: 0;
-    color: #ffffff; /* Warna hitam untuk deskripsi */
+    color: #ffffff; 
 }
 
 .container {

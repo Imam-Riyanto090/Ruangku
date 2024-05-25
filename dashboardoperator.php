@@ -1,18 +1,23 @@
 <?php
 include 'config.php';
 
-// Memeriksa apakah koneksi berhasil dilakukan
+session_start();
+
+if (!isset($_SESSION['nama'])) {
+    header("Location: loginoperator.php");
+    exit();
+}
+
+$nama = $_SESSION['nama']; 
+
 if (!$conn) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
-// Query untuk mengambil data ruangan
 $query = "SELECT * FROM ruangan";
 $result = mysqli_query($conn, $query);
 
-// Logout logic
-if(isset($_POST['logout'])) {
-    session_start();
+if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
     header("Location: loginoperator.php");
@@ -31,7 +36,8 @@ if(isset($_POST['logout'])) {
 <body>
     <div class="container">
         <h1>Dashboard</h1>
-
+        <p>Anda login sebagai :  <?php echo htmlspecialchars($nama); ?></p>
+        
         <form method="GET" action="">
             <div class="search-box">
                 <select name="search_category">
@@ -52,6 +58,8 @@ if(isset($_POST['logout'])) {
                         <th>Nama Ruangan</th>
                         <th>Kapasitas</th>
                         <th>Status</th>
+                        <th>Mulai Sewa</th>
+                        <th>Akhir Sewa</th>
                         <th>Transaksi</th>
                     </tr>
                 </thead>
@@ -70,11 +78,13 @@ if(isset($_POST['logout'])) {
 
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>";
-                        echo "<td>".$row['id_ruangan']."</td>";
-                        echo "<td>".$row['nama_ruangan']."</td>";
-                        echo "<td>".$row['kapasitas']."</td>";
-                        echo "<td>".$row['status']."</td>";
-                        echo "<td><a href='sewa.php?id=".$row['id_ruangan']."'>Sewa</a></td>"; // Tautan untuk menyewa
+                        echo "<td>".htmlspecialchars($row['id_ruangan'])."</td>";
+                        echo "<td>".htmlspecialchars($row['nama_ruangan'])."</td>";
+                        echo "<td>".htmlspecialchars($row['kapasitas'])."</td>";
+                        echo "<td>".htmlspecialchars($row['status'])."</td>";
+                        echo "<td>".htmlspecialchars($row['mulai_sewa'])."</td>";
+                        echo "<td>".htmlspecialchars($row['akhir_sewa'])."</td>";
+                        echo "<td><a href='sewa.php?id=".htmlspecialchars($row['id_ruangan'])."'>Sewa</a></td>";
                         echo "</tr>";
                     }
                     ?>
