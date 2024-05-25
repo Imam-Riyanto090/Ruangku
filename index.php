@@ -8,6 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="header">
+        <h1 class="welcome-title">Selamat datang di Ruangku</h1>
+        <p class="welcome-description">Aplikasi untuk sewa ruang meeting</p>
+    </div>
     <div class="container">
         <h1>Pilih Role Anda</h1>
         <div class="button-container">

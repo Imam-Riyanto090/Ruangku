@@ -1,6 +1,3 @@
-/* styleoperator.css */
-
-/* General reset and box-sizing */
 * {
     margin: 0;
     padding: 0;
@@ -31,7 +28,6 @@ body {
 h1 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
-    color: #6a0dad;
 }
 
 form {

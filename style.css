@@ -1,72 +1,55 @@
-/* style.css */
-
-/* General reset and box-sizing */
-* {
+body {
+    background-color: #6A5ACD; /* Warna ungu */
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #6a0dad; /* Warna latar belakang ungu */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: #fff;
+.header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.welcome-title {
+    margin: 0;
+    color: #FFF; /* Warna teks putih */
+}
+
+.welcome-description {
+    margin: 5px 0;
+    color: #FFF; /* Warna teks putih */
 }
 
 .container {
-    background-color: #ffffff;
-    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #FFF; /* Warna latar belakang putih */
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
-    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
+}
+
+.container h1 {
     text-align: center;
-    animation: fadeIn 1s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-h1 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: #6a0dad;
 }
 
 .button-container {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 button {
-    padding: 0.75rem;
-    margin: 0.5rem 0;
-    background-color: #6a0dad;
-    color: #ffffff;
+    padding: 10px 20px;
+    margin: 0 10px;
     border: none;
-    border-radius: 4px;
-    font-size: 1rem;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
+    background-color: #8A2BE2; /* Warna ungu tua */
+    color: #FFF; /* Warna teks putih */
+    font-size: 16px;
 }
 
 button:hover {
-    background-color: #5a0cb0;
-    transform: translateY(-2px);
-}
-
-button:active {
-    transform: translateY(1px);
+    background-color: #7B68EE; /* Warna ungu muda saat disorot */
 }

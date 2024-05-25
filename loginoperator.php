@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Login Operator</h1>
         <form action="process_loginoperator.php" method="POST">
-            <input type="text" name="email" placeholder="Email" required>
+            <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>

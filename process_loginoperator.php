@@ -2,10 +2,10 @@
 // process_loginoperator.php
 include 'config.php';
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+$Username = $_POST['username'];
+$Password = $_POST['password'];
 
-$sql = "SELECT * FROM OPERATOR WHERE USERNAME = '$username' AND PASSWORD = '$password'";
+$sql = "SELECT * FROM OPERATOR WHERE Username = '$Username' AND Password = '$Password'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
