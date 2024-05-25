@@ -1,6 +1,5 @@
-/* styleoperator.css */
+/* stylesignup.css */
 
-/* General reset and box-sizing */
 * {
     margin: 0;
     padding: 0;
@@ -9,12 +8,11 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #6a0dad; /* Warna latar belakang ungu */
+    background-color: #6a0dad; 
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: #fff;
 }
 
 .container {
@@ -25,13 +23,12 @@ body {
     max-width: 400px;
     width: 100%;
     text-align: center;
-    color: #333333;
 }
 
 h1 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
-    color: #6a0dad;
+    color: #333333;
 }
 
 form {
@@ -40,7 +37,9 @@ form {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="username"],
+input[type="password"],
+input[type="email"] {
     padding: 0.75rem;
     margin-bottom: 1rem;
     border: 1px solid #cccccc;
@@ -50,14 +49,16 @@ input[type="password"] {
 }
 
 input[type="text"]:focus,
-input[type="password"]:focus {
-    border-color: #6a0dad;
+input[type="username"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+    border-color: #007bff;
     outline: none;
 }
 
 button {
     padding: 0.75rem;
-    background-color: #6a0dad;
+    background-color: #007bff;
     color: #ffffff;
     border: none;
     border-radius: 4px;
@@ -67,20 +68,7 @@ button {
 }
 
 button:hover {
-    background-color: #5a0cb0;
-}
-
-.back-button {
-    margin-top: 1rem;
-    background-color: #ffffff;
-    color: #6a0dad;
-    border: 2px solid #6a0dad;
-    font-size: 1rem;
-}
-
-.back-button:hover {
-    background-color: #f3f4f6;
-    color: #5a0cb0;
+    background-color: #0056b3;
 }
 
 .signup-text {
@@ -90,11 +78,11 @@ button:hover {
 }
 
 .signup-text a {
-    color: #6a0dad;
+    color: #007bff;
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .signup-text a:hover {
-    color: #5a0cb0;
+    color: #0056b3;
 }

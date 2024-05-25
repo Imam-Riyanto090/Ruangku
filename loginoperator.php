@@ -14,6 +14,7 @@
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
+        <button class="back-button" onclick="window.location.href='index.php'">Pilih Role</button>
         <p class="signup-text">Belum punya akun? <a href="signupoperator.php">Sign up</a></p>
     </div>
 </body>

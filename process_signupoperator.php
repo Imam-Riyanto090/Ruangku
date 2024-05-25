@@ -1,14 +1,15 @@
 <?php
 // process_signupoperator.php
-include 'db_configoperator.php';
+include 'config.php';
 
 $nama = $_POST['nama'];
-$email = $_POST['email'];
+$username = $_POST['username'];
 $password = $_POST['password'];
+$email = $_POST['email'];
 $no_tlp = $_POST['no_tlp'];
 $alamat = $_POST['alamat'];
 
-$sql = "INSERT INTO OPERATOR (NAMA, EMAIL, PASSWORD, NO_TLP, ALAMAT) VALUES ('$nama', '$email', '$password', '$no_tlp', '$alamat')";
+$sql = "INSERT INTO OPERATOR (NAMA, USERNAME, PASSWORD, EMAIL, NO_TLP, ALAMAT) VALUES ('$nama', '$username', '$password', '$email', '$no_tlp', '$alamat')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
