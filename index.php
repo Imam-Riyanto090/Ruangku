@@ -8,10 +8,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="welcome-container">
-        <div class="welcome-title">Selamat Datang di Aplikasi Ruangku</div>
-        <div class="welcome-description">Kelola ruang meeting anda disini</div>
-    </div>
     <div class="container">
         <h1>Pilih Role Anda</h1>
         <div class="button-container">

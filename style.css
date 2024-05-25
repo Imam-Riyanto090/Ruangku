@@ -1,4 +1,5 @@
 body {
+<<<<<<< HEAD
     font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
@@ -43,10 +44,50 @@ h1 {
 }
 
 .button-container {
+=======
+    background-color: #6A5ACD; /* Warna ungu */
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.welcome-title {
+    margin: 0;
+    color: #FFF; /* Warna teks putih */
+}
+
+.welcome-description {
+    margin: 5px 0;
+    color: #FFF; /* Warna teks putih */
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #FFF; /* Warna latar belakang putih */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
+}
+
+.container h1 {
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+>>>>>>> a554ce1ef0ef9aac1b359de2894192d3943eb563
     margin-top: 20px;
 }
 
 button {
+<<<<<<< HEAD
     background-color: #74009b;
     color: white;
     padding: 15px 32px;
@@ -74,4 +115,18 @@ button:hover {
     to {
         opacity: 1;
     }
+=======
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #8A2BE2; /* Warna ungu tua */
+    color: #FFF; /* Warna teks putih */
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #7B68EE; /* Warna ungu muda saat disorot */
+>>>>>>> a554ce1ef0ef9aac1b359de2894192d3943eb563
 }

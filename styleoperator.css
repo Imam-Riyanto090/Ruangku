@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+=======
+>>>>>>> a554ce1ef0ef9aac1b359de2894192d3943eb563
 * {
     box-sizing: border-box;
     margin: 0;
@@ -32,8 +35,13 @@ body {
 }
 
 h1 {
+<<<<<<< HEAD
     margin-bottom: 1em;
     color: #333;
+=======
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+>>>>>>> a554ce1ef0ef9aac1b359de2894192d3943eb563
 }
 
 .error {

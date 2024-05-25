@@ -16,6 +16,7 @@
         }
         ?>
         <form action="process_loginoperator.php" method="POST">
+<<<<<<< HEAD
             <div class="input-group">
                 <i class="fas fa-user"></i>
                 <input type="text" name="username" placeholder="Username" required>
@@ -24,6 +25,10 @@
                 <i class="fas fa-lock"></i>
                 <input type="password" name="password" placeholder="Password" required>
             </div>
+=======
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+>>>>>>> a554ce1ef0ef9aac1b359de2894192d3943eb563
             <button type="submit">Login</button>
         </form>
         <button class="back-button" onclick="window.location.href='index.php'">Pilih Role</button>
