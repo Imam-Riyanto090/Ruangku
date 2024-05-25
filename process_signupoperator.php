@@ -1,5 +1,4 @@
 <?php
-// process_signupoperator.php
 include 'config.php';
 
 $nama = $_POST['nama'];
@@ -12,9 +11,10 @@ $alamat = $_POST['alamat'];
 $sql = "INSERT INTO OPERATOR (NAMA, USERNAME, PASSWORD, EMAIL, NO_TLP, ALAMAT) VALUES ('$nama', '$username', '$password', '$email', '$no_tlp', '$alamat')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-    // Redirect to login page
-    header("Location: loginoperator.php");
+    echo "<script>
+            alert('Berhasil membuat akun');
+            window.location.href='loginoperator.php';
+          </script>";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

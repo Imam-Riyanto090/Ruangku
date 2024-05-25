@@ -10,8 +10,10 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // Login success
-    echo "Login successful! Welcome, " . $username;
-    // Redirect to operator page or dashboard
+    session_start();
+    $_SESSION['username'] = $username;
+    header("Location: dashboardoperator.php"); // Redirect to dashboard page
+    exit();
 } else {
     // Login failed
     echo "Login failed! Invalid email or password.";
