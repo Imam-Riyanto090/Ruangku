@@ -1,4 +1,4 @@
-/* style.css */
+
 * {
     margin: 0;
     padding: 0;
@@ -14,6 +14,7 @@ body {
     align-items: center;
     height: 100vh;
     text-align: center;
+    overflow: hidden;
 }
 
 .container {
@@ -23,39 +24,47 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     animation: fadeInUp 1s ease-out;
     width: 80%;
-    max-width: 600px;
+    max-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.header {
-    margin-bottom: 20px;
-}
-
-.welcome-title {
-    font-size: 2.5em;
-    font-weight: 700;
-}
-
-.welcome-description {
-    font-size: 1.2em;
-    font-weight: 400;
-}
-
 h1 {
-    font-size: 1.8em;
+    font-size: 2.5em;
     margin-bottom: 20px;
 }
 
-.button-container {
+form {
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
-button {
+input[type="text"], input[type="username"], input[type="password"], input[type="email"] {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    padding: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    transition: background 0.3s, transform 0.3s;
+}
+
+input[type="text"]:focus, input[type="username"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+    outline: none;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+button[type="submit"] {
     background: #6a1b9a;
     color: white;
     border: none;
@@ -64,16 +73,33 @@ button {
     border-radius: 25px;
     cursor: pointer;
     transition: background 0.3s, transform 0.3s;
+    margin-top: 10px;
+    width: 100%;
 }
 
-button:hover {
+button[type="submit"]:hover {
     background: #ab47bc;
     transform: scale(1.05);
 }
 
-button:active {
+button[type="submit"]:active {
     background: #8e24aa;
     transform: scale(0.95);
+}
+
+.signup-text {
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.signup-text a {
+    color: #ab47bc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.signup-text a:hover {
+    color: #dc2430;
 }
 
 @keyframes fadeInUp {
