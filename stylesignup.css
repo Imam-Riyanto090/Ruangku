@@ -1,27 +1,34 @@
+/* stylesignup.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #6000c7, #468aff); 
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
 }
 
 .container {
-    background: #fff;
-    padding: 2em;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
     text-align: center;
 }
 
 h1 {
-    margin-bottom: 1.5em;
-    color: #333;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #333333;
 }
 
 form {
@@ -33,11 +40,11 @@ input[type="text"],
 input[type="username"],
 input[type="password"],
 input[type="email"] {
-    padding: 0.75em;
-    margin-bottom: 1em;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1em;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 1rem;
     transition: border-color 0.3s;
 }
 
@@ -45,36 +52,37 @@ input[type="text"]:focus,
 input[type="username"]:focus,
 input[type="password"]:focus,
 input[type="email"]:focus {
-    border-color: #2575fc;
+    border-color: #007bff;
     outline: none;
 }
 
 button {
-    background: #2575fc;
-    color: #fff;
-    padding: 0.75em;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: #ffffff;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background 0.3s, box-shadow 0.3s; /* Added box-shadow transition */
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background: #6a11cb;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Added box-shadow effect */
+    background-color: #0056b3;
 }
 
 .signup-text {
-    margin-top: 1em;
-    color: #666;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #666666;
 }
 
 .signup-text a {
-    color: #2575fc;
+    color: #007bff;
     text-decoration: none;
-    font-weight: bold;
+    transition: color 0.3s;
 }
 
 .signup-text a:hover {
-    text-decoration: underline;
+    color: #0056b3;
 }

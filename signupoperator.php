@@ -19,14 +19,6 @@
             <button type="submit">Sign Up</button>
         </form>
         <p class="signup-text">Sudah punya akun? <a href="loginoperator.php">Login</a></p>
-
-        <!-- Pesan peringatan akan ditampilkan di sini -->
-        <?php
-        if(isset($_GET['error'])) {
-            $error = $_GET['error'];
-            echo "<div class='error-message'>$error</div>";
-        }
-        ?>
     </div>
 </body>
 </html>

@@ -5,17 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Operator</title>
     <link rel="stylesheet" href="styleoperator.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <h1>Login Operator</h1>
-        <?php
-        if (isset($_GET['error']) && $_GET['error'] == 1) {
-            echo "<p class='error'>Invalid username or password</p>";
-        }
-        ?>
         <form action="process_loginoperator.php" method="POST">
+<<<<<<< HEAD
 <<<<<<< HEAD
             <div class="input-group">
                 <i class="fas fa-user"></i>
@@ -29,6 +24,10 @@
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
 >>>>>>> a554ce1ef0ef9aac1b359de2894192d3943eb563
+=======
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+>>>>>>> parent of 755c2d1 (membuat dashboardoperator dan fungsi lainnya)
             <button type="submit">Login</button>
         </form>
         <button class="back-button" onclick="window.location.href='index.php'">Pilih Role</button>
