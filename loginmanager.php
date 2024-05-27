@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Operator</title>
+    <title>Login Manager</title>
     <link rel="stylesheet" href="login.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Link untuk ikon FontAwesome -->
 </head>
 <body>
     <div class="container">
-        <h1>Login Operator</h1>
-        <form action="process_loginoperator.php" method="POST">
+        <h1>Login Manager</h1>
+        <form action="process_loginmanager.php" method="POST">
             <div class="input-group">
                 <i class="fas fa-user"></i>
                 <input type="text" name="username" placeholder="Username" required>
@@ -22,7 +22,7 @@
             <button type="submit">Login</button>
         </form>
         <button class="back-button" onclick="window.location.href='index.php'">Pilih Role</button>
-        <p class="signup-text">Belum punya akun? <a href="signupoperator.php">Sign up</a></p>
+        <p class="signup-text">Belum punya akun? <a href="signupmanager.php">Sign up</a></p>
     </div>
 </body>
 </html>

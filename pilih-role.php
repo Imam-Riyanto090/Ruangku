@@ -7,12 +7,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: loginoperator.php");
             exit;
         case 'Manajer':
-            // Tambahkan kode pengal    ihan ke halaman manajer di sini, misalnya:
-            // header("Location: loginmanajer.php");
-            // exit;
-            break;
+            header("Location: loginmanager.php");
+            exit;
         case 'Admin':
-            // Tambahkan kode pengalihan ke halaman admin di sini, misalnya:
              header("Location: loginadmin.php");
              exit;
         default:
