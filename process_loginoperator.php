@@ -16,7 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: dashboardoperator.php");
         exit();
     } else {
-        echo "Invalid login credentials";
+        $_SESSION['error'] = "Username atau Password salah!";
+        header("Location: loginoperator.php");
+        exit();
     }
 }
 ?>

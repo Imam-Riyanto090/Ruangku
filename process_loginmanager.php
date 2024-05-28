@@ -1,26 +1,24 @@
 <?php
-session_start();
 include 'config.php';
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-    $query = "SELECT * FROM users WHERE username='$username' AND role='manager'";
+    // Fetch the operator details from the database
+    $query = "SELECT * FROM manager WHERE username='$username' AND password='$password'";
     $result = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
-        if (password_verify($password, $row['password'])) {
-            $_SESSION['username'] = $username;
-            $_SESSION['role'] = 'manager';
-            header("Location: dashboardmanager.php");
-            exit();
-        } else {
-            echo "Invalid password.";
-        }
+        $_SESSION['nama'] = $row['nama']; // Assuming 'nama' is the column storing operator's name
+        header("Location: dashboardmanager.php");
+        exit();
     } else {
-        echo "Invalid username.";
+        $_SESSION['error'] = "Username atau Password salah!";
+        header("Location: loginmanager.php");
+        exit();
     }
 }
 ?>

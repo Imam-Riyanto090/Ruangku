@@ -1,25 +1,27 @@
 <?php
 include 'config.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
-    $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
+$nama = $_POST['nama_manager'];
+$username = $_POST['username'];
+$password = $_POST['password'];
+$email = $_POST['email'];
+$no_tlp = $_POST['no_tlp'];
+$alamat = $_POST['alamat'];
 
-    if ($password !== $confirm_password) {
-        die("Passwords do not match.");
-    }
+// Validasi apakah username, email, dan nomor telepon sudah ada dalam database
+$check_query = "SELECT * FROM MANAGER WHERE USERNAME='$username' OR EMAIL='$email' OR NO_TLP='$no_tlp'";
+$check_result = $conn->query($check_query);
 
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+$sql = "INSERT INTO MANAGER (NAMA_MANAGER, USERNAME, PASSWORD, EMAIL, NO_TLP, ALAMAT) VALUES ('$nama_manager', '$username', '$password', '$email', '$no_tlp', '$alamat')";
 
-    $query = "INSERT INTO users (username, email, password, role) VALUES ('$username', '$email', '$hashed_password', 'manager')";
-
-    if (mysqli_query($conn, $query)) {
-        header("Location: loginmanager.php");
-        exit();
-    } else {
-        echo "Error: " . $query . "<br>" . mysqli_error($conn);
-    }
+if ($conn->query($sql) === TRUE) {
+    echo "<script>
+            alert('Berhasil membuat akun');
+            window.location.href='loginmanager.php';
+          </script>";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
 }
+
+$conn->close();
 ?>

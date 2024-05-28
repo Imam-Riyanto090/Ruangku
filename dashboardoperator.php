@@ -5,9 +5,6 @@ if (!$conn) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
-$query = "SELECT * FROM ruangan";
-$result = mysqli_query($conn, $query);
-
 if(isset($_POST['logout'])) {
     session_start();
     session_unset();
@@ -80,6 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <th>Nama Ruangan</th>
                         <th>Kapasitas</th>
                         <th>Status</th>
+                        <th>Harga Ruangan</th>
                         <th>Transaksi</th>
                     </tr>
                 </thead>
@@ -102,9 +100,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "<td>".$row['nama_ruangan']."</td>";
                         echo "<td>".$row['kapasitas']."</td>";
                         echo "<td>".$row['status']."</td>";
+                        echo "<td>".$row['harga_ruangan']." /jam</td>";
 
-                        // Jika status ruangan adalah "Tidak Tersedia", maka tampilkan teks "Sudah Disewa" dan tidak aktifkan tombol
-                        if ($row['status'] == "Tidak Tersedia") {
+                        if ($row['status'] == "tidak tersedia") {
                             echo "<td>Sudah Disewa</td>";
                         } else {
                             echo "<td><a href='sewa.php?id=".$row['id_ruangan']."'>Sewa</a></td>";
