@@ -5,10 +5,7 @@ if (!$conn) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
-$query = "SELECT * FROM ruangan";
-$result = mysqli_query($conn, $query);
-
-if(isset($_POST['logout'])) {
+if (isset($_POST['logout'])) {
     session_start();
     session_unset();
     session_destroy();
@@ -16,34 +13,31 @@ if(isset($_POST['logout'])) {
     exit();
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id_ruangan = $_GET['id'];
-    $nama_penyewa = $_POST['nama_penyewa'];
-    $tlp_penyewa = $_POST['tlp_penyewa'];
-    $mulai_sewa = $_POST['mulai_sewa'];
-    $akhir_sewa = $_POST['akhir_sewa'];
+// Proses pembaruan harga ruangan
+if(isset($_POST['update_ruangan'])) {
+    $id_ruangan = $_POST['id_ruangan'];
+    $harga_ruangan = $_POST['harga_ruangan'];
 
-    // Mendapatkan alat yang dipilih dari form
-    $alat_pilihan = $_POST['alat_pilihan'];
-
-    // Memperbarui status ruangan menjadi 'Tidak Tersedia'
-    $query_update_ruangan = "UPDATE ruangan SET penyewa='$nama_penyewa', tlp_penyewa='$tlp_penyewa', mulai_sewa='$mulai_sewa', akhir_sewa='$akhir_sewa', status='Tidak Tersedia' WHERE id_ruangan=$id_ruangan";
+    $query_update_ruangan = "UPDATE ruangan SET harga_ruangan='$harga_ruangan' WHERE id_ruangan=$id_ruangan";
 
     if (mysqli_query($conn, $query_update_ruangan)) {
-        // Mengurangi quantity alat yang dipilih dan memperbarui status alat
-        foreach ($alat_pilihan as $id_alat) {
-            $query_update_alat = "UPDATE alat SET quantity = quantity - 1 WHERE id_alat = $id_alat";
-            mysqli_query($conn, $query_update_alat);
-        }
-        
-        // Memperbarui status sewa di tabel transaksi jika ada transaksi yang terkait
-        $query_update_transaksi = "UPDATE transaksi SET status_sewa = 'Sudah Disewa' WHERE id_ruangan = $id_ruangan AND status_sewa = 'Belum Disewa'";
-        mysqli_query($conn, $query_update_transaksi);
-
-        header("Location: dashboardmanager.php");
-        exit();
+        $message = "Harga ruangan berhasil diperbarui";
     } else {
-        echo "Error: " . $query_update_ruangan . "<br>" . mysqli_error($conn);
+        $message = "Error updating record: " . mysqli_error($conn);
+    }
+}
+
+// Proses pembaruan harga alat
+if(isset($_POST['update_alat'])) {
+    $id_alat = $_POST['id_alat'];
+    $harga_alat = $_POST['harga_alat'];
+
+    $query_update_alat = "UPDATE alat SET harga_alat='$harga_alat' WHERE id_alat=$id_alat";
+
+    if (mysqli_query($conn, $query_update_alat)) {
+        $message = "Harga alat berhasil diperbarui";
+    } else {
+        $message = "Error updating record: " . mysqli_error($conn);
     }
 }
 ?>
@@ -60,18 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <h1>Dashboard Manager</h1>
 
-        <form method="GET" action="">
-            <div class="search-box">
-                <select name="search_category">
-                    <option value="nama_ruangan">Nama Ruangan</option>
-                    <option value="kapasitas">Kapasitas Ruangan</option>
-                    <option value="id_ruangan">ID Ruangan</option>
-                </select>
-                <input type="text" name="search_query" placeholder="Search...">
-                <button type="submit">Search</button>
-            </div>
-        </form>
+        <?php if (isset($message)) echo "<p class='message'>$message</p>"; ?>
 
+        <h2>Ruangan</h2>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -79,45 +64,78 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <th>ID Ruangan</th>
                         <th>Nama Ruangan</th>
                         <th>Kapasitas</th>
-                        <th>Status</th>
-                        <th>Transaksi</th>
+                        <th>Harga Ruangan (per jam)</th>
+                        <th>Update</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $search_category = isset($_GET['search_category']) ? $_GET['search_category'] : '';
-                    $search_query = isset($_GET['search_query']) ? $_GET['search_query'] : '';
+                    $query_ruangan = "SELECT * FROM ruangan";
+                    $result_ruangan = mysqli_query($conn, $query_ruangan);
 
-                    $query = "SELECT * FROM ruangan";
-
-                    if (!empty($search_category) && !empty($search_query)) {
-                        $query .= " WHERE $search_category LIKE '%$search_query%'";
-                    }
-
-                    $result = mysqli_query($conn, $query);
-
-                    while ($row = mysqli_fetch_assoc($result)) {
+                    while ($row = mysqli_fetch_assoc($result_ruangan)) {
                         echo "<tr>";
+                        echo "<form method='post' action=''>";
                         echo "<td>".$row['id_ruangan']."</td>";
                         echo "<td>".$row['nama_ruangan']."</td>";
                         echo "<td>".$row['kapasitas']."</td>";
-                        echo "<td>".$row['status']."</td>";
-
-                        // Jika status ruangan adalah "Tidak Tersedia", maka tampilkan teks "Sudah Disewa" dan tidak aktifkan tombol
-                        if ($row['status'] == "Tidak Tersedia") {
-                            echo "<td>Sudah Disewa</td>";
-                        } else {
-                            echo "<td><a href='sewa.php?id=".$row['id_ruangan']."'>Sewa</a></td>";
-                        }
-
+                        echo "<td><input type='number' name='harga_ruangan' value='".$row['harga_ruangan']."' required></td>";
+                        echo "<td>
+                                <input type='hidden' name='id_ruangan' value='".$row['id_ruangan']."'>
+                                <button type='submit' name='update_ruangan'>Update</button>
+                              </td>";
+                        echo "</form>";
                         echo "</tr>";
                     }
                     ?>
                 </tbody>
             </table>
         </div>
-        <form method="post" action="">
+
+        <h2>Alat</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Alat</th>
+                        <th>Nama Alat</th>
+                        <th>Stok Alat</th>
+                        <th>Harga Alat</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $query_alat = "SELECT * FROM alat";
+                    $result_alat = mysqli_query($conn, $query_alat);
+
+                    while ($row = mysqli_fetch_assoc($result_alat)) {
+                        echo "<tr>";
+                        echo "<form method='post' action=''>";
+                        echo "<td>".$row['id_alat']."</td>";
+                        echo "<td>".$row['nama_alat']."</td>";
+                        echo "<td>".$row['quantity']."</td>";
+                        echo "<td><input type='number' name='harga_alat' value='".$row['harga_alat']."' required></td>";
+                        echo "<td>
+                                <input type='hidden' name='id_alat' value='".$row['id_alat']."'>
+                                <button type='submit' name='update_alat'>Update</button>
+                              </td>";
+                        echo "</form>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Form Logout -->
+        <form method="post" action="loginmanager.php">
             <button type="submit" name="logout" class="logout-button">Logout</button>
+        </form>
+
+        <!-- Tombol untuk menuju laporan.php -->
+        <form method="post" action="laporan.php">
+            <button type="submit" class="report-button">Lihat Laporan</button>
         </form>
     </div>
 </body>
