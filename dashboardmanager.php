@@ -63,6 +63,7 @@ if(isset($_POST['update_alat'])) {
                     <tr>
                         <th>ID Ruangan</th>
                         <th>Nama Ruangan</th>
+                        <th>status</th>
                         <th>Kapasitas</th>
                         <th>Harga Ruangan (per jam)</th>
                         <th>Update</th>
@@ -78,6 +79,7 @@ if(isset($_POST['update_alat'])) {
                         echo "<form method='post' action=''>";
                         echo "<td>".$row['id_ruangan']."</td>";
                         echo "<td>".$row['nama_ruangan']."</td>";
+                        echo "<td>".$row['status']."</td>";
                         echo "<td>".$row['kapasitas']."</td>";
                         echo "<td><input type='number' name='harga_ruangan' value='".$row['harga_ruangan']."' required></td>";
                         echo "<td>
@@ -99,6 +101,7 @@ if(isset($_POST['update_alat'])) {
                     <tr>
                         <th>ID Alat</th>
                         <th>Nama Alat</th>
+                        <th>status</th>
                         <th>Stok Alat</th>
                         <th>Harga Alat</th>
                         <th>Update</th>
@@ -114,6 +117,7 @@ if(isset($_POST['update_alat'])) {
                         echo "<form method='post' action=''>";
                         echo "<td>".$row['id_alat']."</td>";
                         echo "<td>".$row['nama_alat']."</td>";
+                        echo "<td>".$row['status']."</td>";
                         echo "<td>".$row['quantity']."</td>";
                         echo "<td><input type='number' name='harga_alat' value='".$row['harga_alat']."' required></td>";
                         echo "<td>
