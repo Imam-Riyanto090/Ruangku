@@ -47,7 +47,8 @@ mysqli_close($conn);
     <div class="container">
         <h1>Dashboard</h1>
 
-       
+        <!-- Tombol Kembali ke Dashboard Manager -->
+        <a href="dashboardmanager.php" class="back-button">Kembali ke Dashboard Manager</a>
 
         <!-- Tabel data transaksi -->
         <table>

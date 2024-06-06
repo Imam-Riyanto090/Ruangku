@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config.php';
 
 if (!$conn) {
@@ -6,7 +7,6 @@ if (!$conn) {
 }
 
 if (isset($_POST['logout'])) {
-    session_start();
     session_unset();
     session_destroy();
     header("Location: loginoperator.php");
@@ -66,7 +66,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query_insert_transaksi = "INSERT INTO transaksi (n_ruangan, penyewa, awal_sewa, akhir_sewa, tlp_penyewa, harga_total, alat, durasi_sewa) VALUES ('$nama_ruangan', '$nama_penyewa', '$mulai_sewa', '$akhir_sewa', '$tlp_penyewa', $harga_total, '" . implode(", ", $nama_alat_pilihan) . "', '$durasi_sewa')";
         mysqli_query($conn, $query_insert_transaksi);
 
-        header("Location: dashboardoperator.php");
+        // Store the total price in a session variable
+        $_SESSION['harga_total'] = $harga_total;
+
+        header("Location: sewa.php?id=$id_ruangan&nama_ruangan=" . urlencode($nama_ruangan) . "&success=1");
         exit();
     } else {
         echo "Error: " . $query_update_ruangan . "<br>" . mysqli_error($conn);
@@ -85,6 +88,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container">
         <h2>Sewa Ruangan: <?php echo htmlspecialchars(isset($_GET['nama_ruangan']) ? $_GET['nama_ruangan'] : ''); ?></h2>
+        
+        <?php if (isset($_GET['success']) && $_GET['success'] == 1 && isset($_SESSION['harga_total'])): ?>
+            <div class="message" style="display: none;">
+                <p>Total harga sewa: Rp. <?php echo number_format($_SESSION['harga_total'], 0, ',', '.'); ?></p>
+            </div>
+            <script>
+                alert("Total harga sewa: Rp. <?php echo number_format($_SESSION['harga_total'], 0, ',', '.'); ?>");
+                window.location.href = "dashboardoperator.php";
+            </script>
+            <?php unset($_SESSION['harga_total']); // Clear the session variable after displaying ?>
+        <?php endif; ?>
+
         <form method="post" action="">
             <div class="form-group">
                 <label for="nama_penyewa">Nama Penyewa:</label>

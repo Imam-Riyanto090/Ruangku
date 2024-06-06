@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             var columns = table.rows[0].cells.length;
 
-            for (var i = 1; i < columns - 1; i++) {
+            for (var i = 0; i < columns - 1; i++) {
                 var cell = row.insertCell(i);
                 var name = table.rows[0].cells[i].getAttribute('data-name');
                 cell.innerHTML = '<input name="' + name + '" type="text">';
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             var row = document.getElementById('new-' + type);
             var cells = row.getElementsByTagName('td');
 
-            for (var i = 1; i < cells.length - 1; i++) {
+            for (var i = 0; i < cells.length - 1; i++) {
                 var input = cells[i].getElementsByTagName('input')[0];
                 var hiddenInput = document.createElement('input');
                 hiddenInput.type = 'hidden';
@@ -221,151 +221,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             rows.forEach(function(row) {
                 var cells = row.getElementsByTagName('td');
                 for (var i = 1; i < cells.length - 1; i++) {
-                    cells[i].setAttribute('data-original-value', cells[i].innerText);
+                    cells[i].setAttribute('data-original-value', cells[i].innerHTML);
                 }
             });
-        };
+        }
     </script>
 </head>
 <body>
-    <h2>Data Operator</h2>
-    <table id="operator-table" border="1">
-        <tr>
-            <th>ID Operator</th>
-            <th data-name="nama">Nama</th>
-            <th data-name="username">Username</th>
-            <th data-name="password">Password</th>
-            <th data-name="email">Email</th>
-            <th data-name="no_tlp">No. Telepon</th>
-            <th data-name="alamat">Alamat</th>
-            <th>Action</th>
-        </tr>
+    <div class="container">
+        <h1>Data Operator dan Manager</h1>
+        <div class="message"><?= isset($message) ? $message : '' ?></div>
+
         <?php
-        $sql = "SELECT id_operator, nama, username, password, email, no_tlp, alamat FROM operator";
-        $result = $conn->query($sql);
+        $types = ['operator', 'manager', 'ruangan', 'alat'];
 
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                echo "<tr id='operator-" . $row["id_operator"] . "'>";
-                echo "<td>" . $row["id_operator"] . "</td>";
-                echo "<td data-name='nama'>" . $row["nama"] . "</td>";
-                echo "<td data-name='username'>" . $row["username"] . "</td>";
-                echo "<td data-name='password'>" . $row["password"] . "</td>";
-                echo "<td data-name='email'>" . $row["email"] . "</td>";
-                echo "<td data-name='no_tlp'>" . $row["no_tlp"] . "</td>";
-                echo "<td data-name='alamat'>" . $row["alamat"] . "</td>";
-                echo "<td><button onclick=\"editRow('operator-" . $row["id_operator"] . "', 'operator')\">Edit</button> <button onclick=\"deleteRow('operator-" . $row["id_operator"] . "', 'operator')\">Delete</button></td>";
+        foreach ($types as $type) {
+            $sql = "SELECT * FROM $type";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                echo "<h2>" . ucfirst($type) . "</h2>";
+                echo "<table id='$type-table'>";
+                echo "<tr>";
+                $fieldNames = [];
+                while ($fieldInfo = $result->fetch_field()) {
+                    $fieldName = $fieldInfo->name;
+                    $fieldNames[] = $fieldName;
+                    echo "<th data-name='$fieldName'>$fieldName</th>";
+                }
+                echo "<th>Actions</th>";
                 echo "</tr>";
+
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr id='{$type}-{$row["id_$type"]}'>";
+                    foreach ($fieldNames as $fieldName) {
+                        echo "<td data-name='$fieldName'>{$row[$fieldName]}</td>";
+                    }
+                    echo "<td>";
+                    echo "<button onclick=\"editRow('{$type}-{$row["id_$type"]}', '$type')\">Edit</button>";
+                    echo "<button onclick=\"deleteRow('{$type}-{$row["id_$type"]}', '$type')\">Delete</button>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+                echo "<button onclick=\"addRow('$type')\">Add</button>";
+            } else {
+                echo "No data found for $type.";
             }
-        } else {
-            echo "<tr><td colspan='8'>Tidak ada data</td></tr>";
         }
+
+        $conn->close();
         ?>
-    </table>
-   
-
-    <h2>Data Manager</h2>
-    <table id="manager-table" border="1">
-        <tr>
-            <th>ID Manager</th>
-            <th data-name="nama_manager">Nama</th>
-            <th data-name="username">Username</th>
-            <th data-name="password">Password</th>
-            <th data-name="email">Email</th>
-            <th data-name="no_tlp">No. Telepon</th>
-            <th data-name="alamat">Alamat</th>
-            <th>Action</th>
-        </tr>
-        <?php
-        $sql_manager = "SELECT id_manager, nama_manager, username, password, email, no_tlp, alamat FROM manager";
-        $result_manager = $conn->query($sql_manager);
-
-        if ($result_manager->num_rows > 0) {
-            while($row_manager = $result_manager->fetch_assoc()) {
-                echo "<tr id='manager-" . $row_manager["id_manager"] . "'>";
-                echo "<td>" . $row_manager["id_manager"] . "</td>";
-                echo "<td data-name='nama_manager'>" . $row_manager["nama_manager"] . "</td>";
-                echo "<td data-name='username'>" . $row_manager["username"] . "</td>";
-                echo "<td data-name='password'>" . $row_manager["password"] . "</td>";
-                echo "<td data-name='email'>" . $row_manager["email"] . "</td>";
-                echo "<td data-name='no_tlp'>" . $row_manager["no_tlp"] . "</td>";
-                echo "<td data-name='alamat'>" . $row_manager["alamat"] . "</td>";
-                echo "<td><button onclick=\"editRow('manager-" . $row_manager["id_manager"] . "', 'manager')\">Edit</button> <button onclick=\"deleteRow('manager-" . $row_manager["id_manager"] . "', 'manager')\">Delete</button></td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='8'>Tidak ada data</td></tr>";
-        }
-        ?>
-    </table>
-   
-    <h2>Data Ruangan</h2>
-    <table id="ruangan-table" border="1">
-        <tr>
-            <th>ID Ruangan</th>
-            <th data-name="nama_ruangan">Nama Ruangan</th>
-            <th data-name="kapasitas">Kapasitas</th>
-            <th data-name="status">Status</th>
-            <th data-name="harga_ruangan">Harga Ruangan</th>
-            <th>Action</th>
-        </tr>
-        <?php
-        $sql_ruangan = "SELECT id_ruangan, nama_ruangan, kapasitas, status, harga_ruangan FROM ruangan";
-        $result_ruangan = $conn->query($sql_ruangan);
-
-        if ($result_ruangan->num_rows > 0) {
-            while($row_ruangan = $result_ruangan->fetch_assoc()) {
-                echo "<tr id='ruangan-" . $row_ruangan["id_ruangan"] . "'>";
-                echo "<td>" . $row_ruangan["id_ruangan"] . "</td>";
-                echo "<td data-name='nama_ruangan'>" . $row_ruangan["nama_ruangan"] . "</td>";
-                echo "<td data-name='kapasitas'>" . $row_ruangan["kapasitas"] . "</td>";
-                echo "<td data-name='status'>" . $row_ruangan["status"] . "</td>";
-                echo "<td data-name='harga_ruangan'>" . $row_ruangan["harga_ruangan"] . "</td>";
-                echo "<td><button onclick=\"editRow('ruangan-" . $row_ruangan["id_ruangan"] . "', 'ruangan')\">Edit</button> <button onclick=\"deleteRow('ruangan-" . $row_ruangan["id_ruangan"] . "', 'ruangan')\">Delete</button></td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='6'>Tidak ada data</td></tr>";
-        }
-        ?>
-    </table>
-    
-
-    <h2>Data Alat</h2>
-    <table id="alat-table" border="1">
-        <tr>
-            <th>ID Alat</th>
-            <th data-name="nama_alat">Nama Alat</th>
-            <th data-name="quantity">Quantity</th>
-            <th data-name="status">Status</th>
-            <th data-name="harga_alat">Harga Alat</th>
-            <th>Action</th>
-        </tr>
-        <?php
-        $sql_alat = "SELECT id_alat, nama_alat, quantity, status, harga_alat FROM alat";
-        $result_alat = $conn->query($sql_alat);
-
-        if ($result_alat->num_rows > 0) {
-            while($row_alat = $result_alat->fetch_assoc()) {
-                echo "<tr id='alat-" . $row_alat["id_alat"] . "'>";
-                echo "<td>" . $row_alat["id_alat"] . "</td>";
-                echo "<td data-name='nama_alat'>" . $row_alat["nama_alat"] . "</td>";
-                echo "<td data-name='quantity'>" . $row_alat["quantity"] . "</td>";
-                echo "<td data-name='status'>" . $row_alat["status"] . "</td>";
-                echo "<td data-name='harga_alat'>" . $row_alat["harga_alat"] . "</td>";
-                echo "<td><button onclick=\"editRow('alat-" . $row_alat["id_alat"] . "', 'alat')\">Edit</button> <button onclick=\"deleteRow('alat-" . $row_alat["id_alat"] . "', 'alat')\">Delete</button></td>";
-                echo "</tr>";
-            }
-        } else {
-            echo "<tr><td colspan='6'>Tidak ada data</td></tr>";
-        }
-        ?>
-    </table>
-   
-    <form action="loginadmin.php" method="post">
-        <input type="submit" value="Logout" class="logout-button">
-    </form>
+    </div>
 </body>
 </html>
-
-<?php $conn->close(); ?>
