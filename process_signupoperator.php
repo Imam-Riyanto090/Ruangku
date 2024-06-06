@@ -1,27 +1,32 @@
 <?php
+// Database connection
 include 'config.php';
 
-$nama = $_POST['nama'];
-$username = $_POST['username'];
-$password = $_POST['password'];
-$email = $_POST['email'];
-$no_telp = $_POST['no_telp'];
-$alamat = $_POST['alamat'];
-
-// Validasi apakah username, email, dan nomor telepon sudah ada dalam database
-$check_query = "SELECT * FROM OPERATOR WHERE USERNAME='$username' OR EMAIL='$email' OR NO_TLP='$no_tlp'";
-$check_result = $conn->query($check_query);
-
-$sql = "INSERT INTO OPERATOR (NAMA, USERNAME, PASSWORD, EMAIL, NO_TELP, ALAMAT) VALUES ('$nama', '$username', '$password', '$email', '$no_telp', '$alamat')";
-
-if ($conn->query($sql) === TRUE) {
-    echo "<script>
-            alert('Berhasil membuat akun');
-            window.location.href='loginoperator.php';
-          </script>";
+// Check connection
+// Check if 'no_telp' is set in the POST request
+if (isset($_POST['no_tlp'])) {
+    $no_telp = $_POST['no_tlp'];
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    die("Phone number is required.");
 }
 
-$conn->close();
+// Other variables from the form
+// Assuming other form fields like name, email, etc. are also being passed
+$nama = $_POST['nama'];
+$email = $_POST['email'];
+$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+// Insert into the database
+$query = "INSERT INTO operator (nama, email, username, password, no_tlp) VALUES (?, ?, ?, ?)";
+$stmt = $mysqli->prepare($query);   
+$stmt->bind_param("ssss", $name, $email, $username, $password, $no_tlp);
+
+if ($stmt->execute()) {
+    echo "New record created successfully";
+} else {
+    echo "Error: " . $stmt->error;
+}
+
+$stmt->close();
+$mysqli->close();
 ?>

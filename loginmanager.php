@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +14,12 @@
 <body>
     <div class="container">
         <h1>Login Manager</h1>
+        <?php
+        if (isset($_SESSION['error'])) {
+            echo "<p style='color:red'>" . $_SESSION['error'] . "</p>";
+            unset($_SESSION['error']); // Clear the error message after displaying it
+        }
+        ?>
         <form action="process_loginmanager.php" method="POST">
             <div class="input-group">
                 <i class="fas fa-user"></i>
@@ -22,7 +32,6 @@
             <button type="submit">Login</button>
         </form>
         <button class="back-button" onclick="window.location.href='index.php'">Pilih Role</button>
-        <p class="signup-text">Belum punya akun? <a href="signupmanager.php">Sign up</a></p>
     </div>
 </body>
 </html>

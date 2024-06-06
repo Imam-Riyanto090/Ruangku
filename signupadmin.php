@@ -18,7 +18,7 @@
             <input type="text" name="alamat" placeholder="Alamat" required>
             <button type="submit">Sign Up</button>
         </form>
-        <p class="signup-text">Sudah punya akun? <a href="loginoperator.php">Login</a></p>
+        <p class="signup-text">Sudah punya akun? <a href="loginadmin.php">Login</a></p>
     </div>
 </body>
 </html>
