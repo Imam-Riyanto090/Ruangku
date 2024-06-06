@@ -141,6 +141,10 @@ if(isset($_POST['update_alat'])) {
         <form method="post" action="laporan.php">
             <button type="submit" class="report-button">Lihat Laporan</button>
         </form>
+         <!-- Tombol untuk menuju laporanmanager.php -->
+         <form method="post" action="laporanmanager.php">
+            <button type="submit" class="report-button">Lihat Rekap Laporan</button>
+        </form>
     </div>
 </body>
 </html>
